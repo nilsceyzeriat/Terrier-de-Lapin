@@ -1,0 +1,197 @@
+<HTML> 
+    
+    <HEAD>
+
+<style>                                        /* J'ai mis le CSS en haut du html pour ne pas être obliger d'avoir 2x plus de page dans le dossier */   
+
+.ut-dialogue                                       /*Debut Intelligence Artificielle*/
+{
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92vw, 640px);
+    min-height: 140px;
+    box-sizing: border-box;
+    padding: 20px 28px;
+    background: #000;                              /* Configuration de la boite de dialogue */
+    border: 6px solid #fff;
+    color: #fff;
+    font-family: "VT323", "Courier New", monospace;
+    font-size: clamp(22px, 4.2vw, 30px);
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    z-index: 1000;
+    image-rendering: pixelated;
+     text-align : left ;
+}
+
+.ut-dialogue__text::before 
+{
+    content: "* ";                    /* Petite étoile au debut de chaque réplique */
+}
+
+.ut-dialogue__text 
+{
+    margin: 0;                         /* Mise en page du texte*/
+    white-space: pre-wrap;
+}
+                                        
+.ut-dialogue__next                               /* Petit triangle */
+{
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
+    font-size: 20px;
+    visibility: hidden;
+    animation: ut-blink 0.8s steps(1) infinite;
+}
+
+.ut-dialogue.is-done .ut-dialogue__next 
+{
+    visibility: visible;                      /* Apparition du triangle quand le texte arrete de defiler */
+}
+  
+@keyframes ut-blink
+{
+    50% { opacity: 0; }                    /* Faire en sorte que le triangle clignote */
+}
+                                                                 /* Fin Intelligence Artificielle*/
+body 
+{ 
+  text-align : center ; margin: 0; min-height: 100vh; 
+}
+
+.sortie1                                                          /* nom de la classe pour la première image qui renvoie vers une autre page */
+{
+    width : 200px ; margin-right : 15vw ; margin-top : 10vw ;
+}
+
+.sortie2                                                              /* Nom de la deuxième sortie */
+{
+    width : 200px ; margin-left : 15vw ; margin-top : 10vw ;
+}
+
+</style>
+
+		<META charset= "utf-8"  / > 
+
+		<TITLE>Jeu Backroom</TITLE>
+
+		<link rel="stylesheet" type="text/css" href="intro.css">
+
+		<link rel="icon" type="image/jpg" href="image/Coeur 2.png">
+
+                                                                                 <!-- Debut Inteligence Artificielle-->                       
+		<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">    <!-- Tipographie du texte -->
+
+	</HEAD>
+
+		<div class="ut-dialogue" id="ut-dialogue" role="status" aria-live="polite" tabindex="0">
+  		<p class="ut-dialogue__text" id="ut-text"></p>                                               <!-- Apparition de la boite de dialogue -->
+  		<span class="ut-dialogue__next" aria-hidden="true">▼</span>
+		</div>
+
+    <BODY>
+
+    <div id="fond"
+     style="position: fixed;
+            top: -2vw;
+            left: -2vw;
+            width: 104vw;
+            height: calc(100vh + 4vw);                                            
+            background: url('image2/Star.jpg') center / cover no-repeat;
+            z-index: -1;
+            pointer-events: none;
+            transition: transform 0.2s ease-out;">                                    <!-- Réglage de l'image de fond -->
+     </div>
+                                                                                  <!-- Fin Inteligence Artificielle-->
+		<a href="index.html">
+  		<img class = "sortie1" src="image/Lapin blanc.jpg" alt="lapin blanc"       
+      style="transition: transform 0.3s ease;"
+      onmouseover="this.style.transform='scale(1.3)'"
+      onmouseout="this.style.transform='scale(1)'">                            <!-- Première image de sortie, le code en dessous de l'image permet de faire grossir l'image quand on passe sa souris dessus -->
+		<a/>	
+
+		<a href="0.html">
+  		<img class = "sortie2" src="image2/Manette.jpg" alt="Manette"
+      style="transition: transform 0.3s ease;"
+      onmouseover="this.style.transform='scale(1.3)'"
+      onmouseout="this.style.transform='scale(1)'">                              <!-- Deuxième image de sortie -->
+		<a/>	
+
+<script>                            // JavaScrip pour la boite de dialogue //
+                                                                                       // Debut Intelligence Artificielle
+
+ const REPLIQUES = [                                         
+    "Vous vous apprêtez à jouer à un jeu conçu par NILS MOUREY sur le thème des BACKROOMS. (cliquer sur le texte pour passer à la suite)",
+    "Le but de celui-ci est d’explorer différentes pièces d’un grand complexe afin de trouver une sortie.",
+    "Faites tout de même attention car chaque choix que vous faites peut également vous coûter la vie.",                                            // Contenu de la boite de dialogue, c'est moi qui ait tout écrit bien sur 
+    "Souhaitez-vous retourner sur le site ou partir à l’exploration du jeu ? (cliquer sur le lapin pour partir et sur la manette pour jouer)"
+  ];
+
+  const VITESSE = 35;             // vitesse d'apparition des lettre (ici 35ms par lettre)
+
+  const boite = document.getElementById("ut-dialogue");
+  const texte = document.getElementById("ut-text");                                          
+  const reduireMouvement = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let index = 0;
+  let timer = null;
+
+  function afficher(i) {
+    clearInterval(timer);
+    boite.classList.remove("is-done");
+    const ligne = REPLIQUES[i];                                      // Apparition des répliques 
+    if (reduireMouvement) {
+      texte.textContent = ligne;
+      boite.classList.add("is-done");
+      return;
+    }
+    let n = 0;
+    texte.textContent = "";
+    timer = setInterval(() => {
+      n++;
+      texte.textContent = ligne.slice(0, n);
+      if (n >= ligne.length) {
+        clearInterval(timer);
+        boite.classList.add("is-done");
+      }
+    }, VITESSE);
+  }
+
+  function suivant() {
+    if (!boite.classList.contains("is-done")) {
+      clearInterval(timer);
+      texte.textContent = REPLIQUES[index];
+      boite.classList.add("is-done");                   // Reglage pour la boite de dialogue
+    } else if (index < REPLIQUES.length - 1) {
+      index++;
+      afficher(index);
+    }
+  }
+
+  boite.addEventListener("click", suivant);
+  boite.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {             // passer à la suite sur la boite de dialogue
+      e.preventDefault();
+      suivant();
+    }
+  });
+
+  afficher(0);
+  
+document.addEventListener("mousemove", function (e) {
+    var x = (e.clientX / window.innerWidth - 0.5) * -2;
+    var y = (e.clientY / window.innerHeight - 0.5) * -2;               // effet de parralaxe 
+    var force = 1.5;
+    document.getElementById("fond").style.transform =
+        "translate(" + x * force + "vw, " + y * force + "vw)";
+});
+
+                                                                              // Fin Intelligence Artificielle
+</script>
+
+		</BODY>
+
+</HTML>

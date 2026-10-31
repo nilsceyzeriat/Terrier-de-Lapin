@@ -1,0 +1,79 @@
+html
+{
+    font-family : 'Trebuchet MS'; font-size: 100%;  /* réglage de la police et taille de tout les textes de la page, j'ai choisi "Trebuchet MS" car je l'aime beaucoup */
+}
+
+body                    
+{
+    font-size: 1.2vw ; background-image: url("image/Fond lapin bleu 3.jpg"); text-align : center ;      /* mise en page, taille du texte normal et fond du site, j'ai choisi le "vw" car il s'adapte à la taille de la page donc facilite la lecture sur mobile comme ordinateur */
+}
+
+h1 
+{
+    font-size: 4.5vw; font-size: 3; color: #795ff0; position : absolute ; top: 0.5vw; left: 33vw;      /* réglage du titre de la page */
+}
+
+h2 
+{ 
+    font-size: 2vw; color: #ff50e5c5; text-align: center;        /* titre des paragraphes */
+}
+
+section 
+{
+	border: 0.6vw dotted rgb(235, 84, 255); border-radius: 5vw; text-align: left; background-color : rgba(189, 231, 255, 0.973) ;    /* bordure des pargraphes */
+    padding: 2vw; margin: 3vw;  display: inline-block; width : 45% ;                                                                      /* taille et positionnement */
+} 
+
+
+header 
+{
+	background-color : rgb(243, 196, 204); background-repeat: repeat-x;                                   /* couleur du fond du haut de la page */
+	text-align : center ;   border: 0.4vw ridge rgb(229, 126, 255);                                    /* texte du header et bordure */
+    margin-left : -20px ; margin-right : -20px ; margin-top : -20px; padding-top : 3vw ; padding-bottom : 3vw ;           /* J'ai joué avec "margin" pour que le header depasse de la page et prenne tout le haut de la page au lieu de laisser des bouts de body autour */
+}
+
+footer
+{
+	background-color : pink; background-repeat: repeat-x; text-align : center;                       /* couleur de fond du bas de la page */                      
+    border : 0.4vw ridge rgb(229, 126, 255); padding-top : 0.5vw                            /* bordure du footer, j'ai fais expres de laisser le body tout autour de celui-ci pour bien le différencier du header */
+}
+
+.block     /* nom que j'ai donné à la classs qui contient presque toutes les images */
+{
+    display : inline-block ; width : 30% ; margin : 3vw;                 /* positionnement des images */      
+    border: 0.6vw solid rgb(131, 150, 255); border-radius: 5vw ;       /* bordure des images */
+
+}
+
+.blockS   /* nom que j'ai donné aux images qui n'ont pas de bordure */
+{
+    display : inline-block ; width : 30% ; margin : 2%;          /* il n'y a que le positionnement ducoup */
+}
+
+.video    /* classe des vidéos */
+{
+    display : inline-block ; width : 50% ; margin : 3vw;                 /* positionnement des vidéos */      
+    border: 0.6vw solid rgb(131, 150, 255); border-radius: 5vw ;       /* bordure des vidéos */
+}
+
+.gauche         /* nom de la class qui contient toutes les flèches qui pointent vers la gauche dans les menus de navigations */
+{
+    width : 13vw; margin-right : 30vw    /* taille et positionnement */
+}
+
+.droite         /* ducoup la c'est les fleches qui pointent vers la droite */
+{
+    width : 13vw; margin-left : 30vw ;   /* taille et positionnement */
+}
+
+
+.logo2        /* classe dans laquelle j'ai mis mes logos, l'image en haut gauche de la page, il s'appelle "logo2" car "logo1" n'a pas été retenu pour le poste */
+{
+    width : 10vw ; position: absolute;  top: 0px; left: 0px;        /* taille et positionnement */
+}
+
+.rien           /* class que j'ai donné à une image qui me sert à faire de la mise en page dans le header de l'index */
+{
+        width : 13vw; margin-right : 30vw ;          /* taille et positionnement */
+}
+
